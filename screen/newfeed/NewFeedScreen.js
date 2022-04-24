@@ -1,8 +1,10 @@
-import { Text, View, ScrollView, Image } from 'react-native'
+import { Text, View, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
 import styles from './styles/NewFeedStyles'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCamera, faPenClip, faEllipsis, faHeart, faMessage } from '@fortawesome/free-solid-svg-icons'
+
+
 
 const dataAvatar = [
     {
@@ -47,8 +49,30 @@ const dataAvatar = [
     }
 ]
 
+
+
+
 export default class NewFeedScreen extends Component {
 
+
+    state = {
+        heart: 2,
+        comment: 4,
+    }
+
+    onPressHeart = () => {
+        let heart_sum = this.state.heart + 1;
+        this.setState({ heart: heart_sum }, () => {
+            console.log('Số tim: ', heart_sum)
+        })
+    }
+
+    onPressComment = () => {
+        let comment_sum = this.state.comment + 1;
+        this.setState({ comment: comment_sum }, () => {
+            console.log('Số cmt: ', comment_sum)
+        })
+    }
     renderHeader = () => {
         return (
             <View style={styles.container_header}>
@@ -80,59 +104,60 @@ export default class NewFeedScreen extends Component {
 
     renderFeeds = () => {
         return (
-            <View>
-                <ScrollView>
-                    {
-                        dataAvatar.map((data, index) => (
-                            <View key={index} style={styles.feed_container}>
-                                <View>
-                                    <View style={styles.feed_title}>
-                                        <Image source={data.image} style={styles.feed_avatar} />
-                                        <View style={styles.feed_text}>
-                                            <Text>Lorem ipsum is simply dummy text</Text>
-                                            <View style={styles.feed_info}>
-                                                <Text>{data.name}</Text>
-                                                <Text>1 minutes</Text>
-                                            </View>
-                                        </View>
-                                        <FontAwesomeIcon style={styles.feed_icon} icon={faEllipsis} />
+            <ScrollView>
+                {
+                    dataAvatar.map((data, index) => {
+                        return <View style={styles.feed_container} key={index}>
+                            <View style={styles.feed_header}>
+                                <Image style={styles.feed_avatar} source={data.image} />
+                                <View style={styles.feed_text}>
+                                    <Text>Lorem Ipsum is simply dummy text</Text>
+                                    <View style={styles.feed_info}>
+                                        <Text>{data.name}</Text>
+                                        <Text>1 minutes</Text>
                                     </View>
-                                    <View>
-                                        <Text style={styles.feed_container_content}>
-                                            Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry. Lorem Ipsum has been the
-                                            industry's standard dummy text ever since the 1500s,
-                                            when an unknown printer took a galley at type and
-                                            scrambled it to make a type specimen book. It has
-                                            survived not only five centuries, but also the leap into
-                                            electronic typesetting, remaining essentially unchanged.
-                                            It was popularised in the 1960s with the release of
-                                            Letraset sheets containing Lore Ipsum passages, and
-                                            more recently with desktop publishing software like
-                                            Aldus PageMaker including versions of Lorem p sum
-                                        </Text>
-                                    </View>
-                                    <View style={styles.feed_react_comment}>
-                                        <View style={styles.feed_react}>
-                                            <View style={styles.background_heart}>
-                                                <FontAwesomeIcon style={styles.feed_react_icon} icon={faHeart} />
-                                            </View>
-                                            <Text style={styles.number}>2</Text>
-                                        </View>
-                                        <View style={styles.feed_comment}>
-                                            <View style={styles.background_comment}>
-                                                <FontAwesomeIcon style={styles.feed_comment_icon} icon={faMessage} />
-                                            </View>
-                                            <Text style={styles.number}>4</Text>
-                                        </View>
-                                    </View>
-                                    
                                 </View>
+                                <FontAwesomeIcon style={styles.feed_icon} icon={faEllipsis} />
                             </View>
-                        ))
-                    }
-                </ScrollView>
-            </View>
+                            <View style={styles.feed_container_content}>
+                                <Text>
+                                    Lorem Ipsum is simply dummy text of the printing and
+                                    typesetting industry. Lorem Ipsum has been the
+                                    industry's standard dummy text ever since the 1500s,
+                                    when an unknown printer took a galley at type and
+                                    scrambled it to make a type specimen book. It has
+                                    survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged.
+                                    It was popularised in the 1960s with the release of
+                                    Letraset sheets containing Lore Ipsum passages, and
+                                    more recently with desktop publishing software like
+                                    Aldus PageMaker including versions of Lorem p sum
+                                </Text>
+                            </View>
+                            <View style={styles.feed_footer}>
+                                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}
+                                    onPress={this.onPressHeart}
+                                >
+                                    <Image
+                                        style={{ width: 35, height: 35 }}
+                                        source={require('../../asset/heart_icon.png')}
+                                    />
+                                    <Text>{this.state.heart}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}
+                                    onPress={this.onPressComment}
+                                >
+                                    <Image
+                                        style={{ width: 20, height: 20 }}
+                                        source={require('../../asset/comment.png')}
+                                    />
+                                    <Text style={{ marginLeft: 5 }}>{this.state.comment}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    })
+                }
+            </ScrollView>
         );
     }
 

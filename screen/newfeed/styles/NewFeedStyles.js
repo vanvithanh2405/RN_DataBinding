@@ -47,7 +47,7 @@ export default styles = StyleSheet.create({
         padding: 5
     },
 
-    feed_title: {
+    feed_header: {
         flexDirection: 'row',
     },
     feed_avatar: {
@@ -71,40 +71,10 @@ export default styles = StyleSheet.create({
     },
     feed_react_comment: {
         flexDirection: 'row'
-
     },
-    feed_react: {
+    feed_footer: {
         flexDirection: 'row',
-        marginLeft: 10,
-    },
-    background_heart:{
-        backgroundColor: 'red',
-        width: 26,
-        height: 26,
-        padding: 5,
-        borderRadius: 50,
-    },
-    feed_react_icon:{
-        color: '#fff',
-        fontSize: 10,
-        
     }, 
-    feed_comment: {
-        flexDirection: 'row',
-        marginLeft: 10
-    },
-    number: {
-        marginLeft: 5
-    },
-
-    background_comment: {
-        backgroundColor: '#fff',
-        width: 26,
-        height: 26,
-        padding: 5,
-        borderRadius: 50,
-    },
-
 
 
 })
